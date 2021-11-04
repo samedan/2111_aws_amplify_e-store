@@ -1,0 +1,75 @@
+# ----------------------------------------
+# Exportation de rapport au format CSV
+# Compte : Decideur-info.com
+# Propriété : Decideur-info.com
+# ----------------------------------------
+# 
+# Tous les utilisateurs
+# Date de début : 20211019
+# Date de fin : 20211019
+
+Titre de la page et classe de l'écran,Vues
+(other),27817
+DSI_2110_Hyland,2497
+DAF_2110_Qonto,2383
+DSI_2109_Purestorage,2332
+DSI_2109_Zendesk_lp,2324
+DAF_2110_EulerHermes,2308
+DAF_2110_Cegid,2285
+DSI_2109_Sage,2217
+DAF_2110_SapConcur,1356
+DMK_2109_Freshworks_lp,1323
+DMK_2109_Zendesk_lp,1188
+DRH_2110_7Speaking,299
+ServicesInfo_2110_Cegid,276
+DRH_2110_Talentsoft,271
+DRH_2110_7Speaking_telechargement,23
+DRH_2110_Talentsoft_Telechargement,12
+DAF_2110_Qonto_telechargement,9
+DMK_2109_Freshworks_telechargement,9
+DMK_2109_Zendesk_telechargement,8
+DSI_2109_Zendesk_telechargement,8
+DSI_2109_Sage_téléchargement,6
+DSI_2109_Purestorage_telechargement,5
+DAF_2110_SapConcur_telechargement,4
+DSI_2110_Hyland_telechargement,4
+DAF_2110_EulerHermes_telechargement,3
+DAF_2110_Cegid_telechargement,2
+ServicesInfo_2110_Cegid_telechargement,2
+
+# Date de début : 20211019
+# Date de fin : 20211019
+Titre de la page et classe de l'écran,Vues,Utilisateurs
+DSI_2110_Hyland,2497,2895
+DAF_2110_Qonto,2383,2916
+DSI_2109_Purestorage,2332,2675
+DSI_2109_Zendesk_lp,2324,2822
+DAF_2110_EulerHermes,2308,2747
+DAF_2110_Cegid,2285,2730
+DSI_2109_Sage,2217,2606
+DAF_2110_SapConcur,1356,2116
+DMK_2109_Freshworks_lp,1323,1547
+DMK_2109_Zendesk_lp,1188,1421
+DRH_2110_7Speaking,299,348
+ServicesInfo_2110_Cegid,276,449
+DRH_2110_Talentsoft,271,310
+
+# Tous les utilisateurs
+# Date de début : 20211019
+# Date de fin : 20211019
+
+Titre de la page et classe de l'écran,Vues,Utilisateurs,Nouveaux utilisateurs,Vues par utilisateur,Durée d'engagement moyenne,Défilements de page par des utilisateurs uniques,Nombre d'événements,Conversions,Total des revenus
+(other),27817,10473,6251,2.6560679843406856,33.18313759190299,0,72662,0,0
+DSI_2110_Hyland,2497,2895,437,0.8625215889464594,9.722970639032814,1325,6104,0,0
+DAF_2110_Qonto,2383,2916,519,0.8172153635116598,11.075445816186557,1425,6368,0,0
+DSI_2109_Purestorage,2332,2675,232,0.8717757009345795,10.031401869158879,1292,5503,0,0
+DSI_2109_Zendesk_lp,2324,2822,829,0.8235294117647058,10.611622962437988,1183,6560,0,0
+DAF_2110_EulerHermes,2308,2747,455,0.8401892974153622,12.183472879504915,1349,6084,0,0
+DAF_2110_Cegid,2285,2730,425,0.836996336996337,11.87948717948718,1315,5946,0,0
+DSI_2109_Sage,2217,2606,208,0.850729086722947,10.267843438219494,1251,5301,0,0
+DAF_2110_SapConcur,1356,2116,287,0.6408317580340265,8.997637051039698,884,3585,0,0
+DMK_2109_Freshworks_lp,1323,1547,432,0.8552036199095022,8.384615384615385,560,3425,0,0
+DMK_2109_Zendesk_lp,1188,1421,406,0.8360309641097818,8.217452498240675,502,3090,0,0
+DRH_2110_7Speaking,299,348,112,0.8591954022988506,7.146551724137931,95,788,0,0
+ServicesInfo_2110_Cegid,276,449,233,0.6146993318485523,1.3919821826280623,149,949,0,0
+DRH_2110_Talentsoft,271,310,84,0.8741935483870967,5.025806451612903,79,642,0,0
