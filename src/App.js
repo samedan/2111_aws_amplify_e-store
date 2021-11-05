@@ -8,6 +8,8 @@ import MarketPage from "./pages/MarketPage";
 import ProfilePage from "./pages/ProfilePage";
 import Navbar from "./components/Navbar";
 
+export const UserContext = React.createContext();
+
 class App extends React.Component {
   state = {
     user: null,
@@ -18,7 +20,7 @@ class App extends React.Component {
     // console.dir(AmplifyTheme);
     this.getUserData();
     Hub.listen(
-      // the channelm where to listen to events
+      // the channel where to listen to events
       "auth",
       // where we want to listen to events, inside and aout of the component
       this,
@@ -64,24 +66,26 @@ class App extends React.Component {
     return !user ? (
       <Authenticator theme={theme} />
     ) : (
-      <Router>
-        <>
-          {/* Navbar */}
-          <Navbar user={user} handleSignout={this.handleSignout} />
-          {/* {Routes} */}
-          <div className="app-container">
-            <Route exact path="/" component={HomePage} />
-            <Route exact path="/profile" component={ProfilePage} />
-            <Route
-              exact
-              path="/markets/:marketId"
-              component={({ match }) => (
-                <MarketPage marketId={match.params.marketId} />
-              )}
-            />
-          </div>
-        </>
-      </Router>
+      <UserContext.Provider value={{ user }}>
+        <Router>
+          <>
+            {/* Navbar */}
+            <Navbar user={user} handleSignout={this.handleSignout} />
+            {/* {Routes} */}
+            <div className="app-container">
+              <Route exact path="/" component={HomePage} />
+              <Route exact path="/profile" component={ProfilePage} />
+              <Route
+                exact
+                path="/markets/:marketId"
+                component={({ match }) => (
+                  <MarketPage marketId={match.params.marketId} />
+                )}
+              />
+            </div>
+          </>
+        </Router>
+      </UserContext.Provider>
     );
   }
 }
