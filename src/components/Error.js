@@ -1,5 +1,11 @@
 import React from "react";
 
-const Error = () => <div>Error</div>;
+const Error = ({ errors }) => (
+  <pre>
+    {errors.map((error, i) => (
+      <div key={i}>{error.message}</div>
+    ))}
+  </pre>
+);
 
 export default Error;
