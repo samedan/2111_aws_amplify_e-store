@@ -3,3 +3,8 @@ Accounts:
 qxxxwxveqbfvguwisw@mrvpm.net
 
 
+# amplify console api 
+
+# API > appName > Queries > 
+  > Amazon Cognito User Pool (aws-exports.js) >
+  > Registered  10min user > Run Query
