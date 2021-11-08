@@ -291,3 +291,11 @@ body {
     display: none;
   }
 }
+
+.icon {
+  margin-right: 5px;
+}
+
+.shipping-icon {
+  height: 20px;
+}
