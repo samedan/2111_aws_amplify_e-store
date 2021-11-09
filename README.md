@@ -1,3 +1,14 @@
+# Stripe
+
+```Stripe
+/src/stripe.keys.js
+export const stripeKeys = {
+  publishableAPIKey: "",
+  secretKey: "",
+};
+
+```
+
 ## schema.graphql
 
 ```graphql
@@ -77,7 +88,7 @@ const config = {
   accessKeyId: "***",
   secretAccessKey: "***",
   region: "us-west-2",
-  adminEmail: "***"
+  adminEmail: "***",
 };
 
 var ses = new AWS.SES(config);
@@ -106,7 +117,7 @@ const chargeHandler = async (req, res, next) => {
       source: token.id,
       amount,
       currency,
-      description
+      description,
     });
     if (charge.status === "succeeded") {
       req.charge = charge;
@@ -119,13 +130,13 @@ const chargeHandler = async (req, res, next) => {
   }
 };
 
-const convertCentsToDollars = price => (price / 100).toFixed(2);
+const convertCentsToDollars = (price) => (price / 100).toFixed(2);
 
 const emailHandler = (req, res) => {
   const {
     charge,
     description,
-    email: { shipped, customerEmail, ownerEmail }
+    email: { shipped, customerEmail, ownerEmail },
   } = req;
 
   ses.sendEmail(
@@ -133,12 +144,13 @@ const emailHandler = (req, res) => {
       Source: config.adminEmail,
       ReturnPath: config.adminEmail,
       Destination: {
-      /* add customerEmail and ownerEmail to ToAddresses array after you've moved out of the sandbox for SES */ 
-        ToAddresses: [config.adminEmail]
+        /* add customerEmail and ownerEmail to ToAddresses array after you've moved out of the sandbox for SES */
+
+        ToAddresses: [config.adminEmail],
       },
       Message: {
         Subject: {
-          Data: "Order Details - AmplifyAgora"
+          Data: "Order Details - AmplifyAgora",
         },
         Body: {
           Html: {
@@ -171,10 +183,10 @@ const emailHandler = (req, res) => {
                   : "Check your verified email for your emailed product"
               }
             </p>
-            `
-          }
-        }
-      }
+            `,
+          },
+        },
+      },
     },
     (err, data) => {
       if (err) {
@@ -183,7 +195,7 @@ const emailHandler = (req, res) => {
       res.json({
         message: "Order processed successfully!",
         charge,
-        data
+        data,
       });
     }
   );
@@ -200,4 +212,5 @@ app.listen(3000, function() {
 // this file
 module.exports = app;
 ```
-"# 2111_aws_amplify_e-store" 
+
+"# 2111_aws_amplify_e-store"
