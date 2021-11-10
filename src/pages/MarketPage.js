@@ -139,6 +139,7 @@ class MarketPage extends React.Component {
       <Loading fullscreen={true} />
     ) : (
       <>
+        {/* <p>{new Date(Date.now()).toDateString()}</p> */}
         <Link className="link" to="/">
           Back to market list
         </Link>
