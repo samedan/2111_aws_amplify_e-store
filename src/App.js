@@ -3,12 +3,16 @@ import "./App.css";
 import { Authenticator, AmplifyTheme } from "aws-amplify-react";
 import { Auth, API, Hub, graphqlOperation } from "aws-amplify";
 import { getUser } from "./graphql/queries";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Router, Route } from "react-router-dom";
+import createBrowserHistory from "history/createBrowserHistory";
 import HomePage from "./pages/HomePage";
 import MarketPage from "./pages/MarketPage";
 import ProfilePage from "./pages/ProfilePage";
 import Navbar from "./components/Navbar";
 import { registerUser } from "./graphql/mutations";
+
+// so we can reroute to main pageafter Order (PayButton)
+export const history = createBrowserHistory();
 
 export const UserContext = React.createContext();
 
@@ -94,7 +98,7 @@ class App extends React.Component {
       <Authenticator theme={theme} />
     ) : (
       <UserContext.Provider value={{ user }}>
-        <Router>
+        <Router history={history}>
           <>
             {/* Navbar */}
             <Navbar user={user} handleSignout={this.handleSignout} />

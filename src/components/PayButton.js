@@ -5,6 +5,7 @@ import { getUser } from "../graphql/queries";
 import StripeCheckout from "react-stripe-checkout";
 import { stripeKeys } from "../stripe.keys";
 import { createOrder } from "../graphql/mutations";
+import { history } from "../App";
 
 const stripeConfig = {
   currency: "USD",
@@ -16,6 +17,7 @@ const PayButton = ({ product, user }) => {
     try {
       const input = { id: ownerId };
       const result = await API.graphql(graphqlOperation(getUser, input));
+      console.log(result);
       return result.data.getUser.email;
     } catch (error) {
       console.error("Error fetching user email: ", error);
@@ -31,6 +33,7 @@ const PayButton = ({ product, user }) => {
   });
 
   const handleCharge = async (token) => {
+    console.log(product);
     try {
       const ownerEmail = await getOwnerEmail(product.owner);
       console.log(ownerEmail);
@@ -50,18 +53,44 @@ const PayButton = ({ product, user }) => {
           },
         },
       });
-      console.log(result);
+      console.log({ result });
       if (result.charge.status === "succeeded") {
-        let shippingAddress = null;
+        // shippedAddress in schema, not shippingAddress (tutorial)
+        let shippedAddress = null;
         if (product.shipped) {
-          shippingAddress = createShippingAddress(result.charge.source);
+          shippedAddress = createShippingAddress(result.charge.source);
         }
         const input = {
           orderUserId: user.attributes.sub,
+          orderProductId: product.id,
+          shippedAddress,
         };
+        const order = await API.graphql(
+          graphqlOperation(createOrder, { input })
+        );
+        console.log(order);
+        Notification({
+          title: "Success",
+          message: `${result.message}`,
+          type: "success",
+          duration: 3000,
+        });
+        setTimeout(() => {
+          history.push("/");
+          Message({
+            type: "info",
+            message: "Check your verified email for order details",
+            duration: 7000,
+            showClose: true,
+          });
+        }, 3000);
       }
     } catch (error) {
       console.error(error);
+      Notification.error({
+        title: "Error",
+        message: `${error.message || "Error processing order"}`,
+      });
     }
   };
 
