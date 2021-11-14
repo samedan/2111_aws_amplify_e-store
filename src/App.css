@@ -6,6 +6,10 @@ body {
     Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
+.colored {
+  color: blueviolet;
+}
+
 .app-container {
   padding: 1em 5em 2em 5em;
 }
