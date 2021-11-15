@@ -19,6 +19,7 @@ export const UserContext = React.createContext();
 class App extends React.Component {
   state = {
     user: null,
+    userAttributes: null,
   };
 
   componentDidMount() {
@@ -37,7 +38,20 @@ class App extends React.Component {
 
   getUserData = async () => {
     const user = await Auth.currentAuthenticatedUser();
-    user ? this.setState({ user: user }) : this.setState({ user: null });
+    user
+      ? this.setState({ user: user }, () =>
+          this.getUserAttributes(this.state.user)
+        )
+      : this.setState({ user: null });
+  };
+
+  // {email, email_verified, phone_number, phone_number_verified, sub}
+  getUserAttributes = async (authUserData) => {
+    // Attributes Array
+    const attributesArray = await Auth.userAttributes(authUserData);
+    const attributesObject = Auth.attributesToObject(attributesArray);
+    console.log(attributesObject);
+    this.setState({ userAttributes: attributesObject });
   };
 
   onHubCapsule = (capsule) => {
@@ -93,11 +107,11 @@ class App extends React.Component {
   };
 
   render() {
-    const { user } = this.state;
+    const { user, userAttributes } = this.state;
     return !user ? (
       <Authenticator theme={theme} />
     ) : (
-      <UserContext.Provider value={{ user }}>
+      <UserContext.Provider value={{ user, userAttributes }}>
         <Router history={history}>
           <>
             {/* Navbar */}
@@ -108,13 +122,19 @@ class App extends React.Component {
               <Route
                 exact
                 path="/profile"
-                component={() => <ProfilePage user={user} />}
+                component={() => (
+                  <ProfilePage userAttributes={userAttributes} user={user} />
+                )}
               />
               <Route
                 exact
                 path="/markets/:marketId"
                 component={({ match }) => (
-                  <MarketPage user={user} marketId={match.params.marketId} />
+                  <MarketPage
+                    user={user}
+                    userAttributes={userAttributes}
+                    marketId={match.params.marketId}
+                  />
                 )}
               />
             </div>

@@ -9,6 +9,7 @@ import { UserContext } from "../App";
 import PayButton from "./PayButton";
 import { updateProduct, deleteProduct } from "../graphql/mutations";
 import { API, graphqlOperation } from "aws-amplify";
+import { Link } from "react-router-dom";
 
 class Product extends React.Component {
   state = {
@@ -82,8 +83,11 @@ class Product extends React.Component {
 
     return (
       <UserContext.Consumer>
-        {({ user }) => {
-          const isProductOwner = user && user.attributes.sub === product.owner;
+        {({ userAttributes }) => {
+          const isProductOwner =
+            userAttributes && userAttributes.sub === product.owner;
+          const isEmailVerified =
+            userAttributes && userAttributes.email_verified;
           return (
             <div className="card-container">
               <Card bodyStyle={{ padding: 0, minWidth: "200px" }}>
@@ -108,8 +112,17 @@ class Product extends React.Component {
                     <span className="mx-1">
                       ${convertCentsToDollars(product.price)}
                     </span>
-                    {!isProductOwner && (
-                      <PayButton product={product} user={user} />
+                    {isEmailVerified ? (
+                      !isProductOwner && (
+                        <PayButton
+                          product={product}
+                          userAttributes={userAttributes}
+                        />
+                      )
+                    ) : (
+                      <Link to="/profile" className="link">
+                        Verify email to buy this product
+                      </Link>
                     )}
                   </div>
                 </div>

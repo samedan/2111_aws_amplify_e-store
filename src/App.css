@@ -170,11 +170,19 @@ body {
   background: rgba(255, 0, 0, 0.2);
 }
 
-.link {
+.link-title {
   text-decoration: none;
   font-weight: bold;
   margin-right: 5px;
   color: var(--lightSquidInk);
+}
+
+.link {
+  text-decoration: underline;
+  font-weight: normal;
+  margin-right: 5px;
+  /* color: var(--lightSquidInk); */
+  color: #f7ba2a;
 }
 
 .link:hover {

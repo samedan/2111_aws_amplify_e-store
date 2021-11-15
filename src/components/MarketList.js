@@ -65,7 +65,7 @@ const MarketList = ({ searchResults, searchTerm }) => {
                 >
                   <div>
                     <span className="flex">
-                      <Link className="link" to={`/markets/${market.id}`}>
+                      <Link className="link-title" to={`/markets/${market.id}`}>
                         {market.name}
                       </Link>
                       <span style={{ color: "var(--darkAmazonOrange)" }}>
