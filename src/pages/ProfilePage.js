@@ -1,8 +1,8 @@
 import React from "react";
 // prettier-ignore
-import { Table, Button, Notification, MessageBox, Message, Tabs, Icon, Form, Dialog, Input, Card, Tag } from 'element-react'
+import { Table, Button, Notification, MessageBox, Message, Tabs, Icon, Form, Dialog,Loading, Input, Card, Tag } from 'element-react'
 import { API, Auth, graphqlOperation } from "aws-amplify";
-import { convertCentsToDollars } from "../utils";
+import { convertCentsToDollars, formatOrderDate } from "../utils";
 
 const getUser = /* GraphQL */ `
   query GetUser($id: ID!) {
@@ -79,7 +79,11 @@ class ProfilePage extends React.Component {
               );
             case "Delete Profile":
               return (
-                <Button type="danger" size="small">
+                <Button
+                  onClick={this.handleDeleteProfile}
+                  type="danger"
+                  size="small"
+                >
                   Delete
                 </Button>
               );
@@ -100,7 +104,12 @@ class ProfilePage extends React.Component {
   getUserOrders = async (userId) => {
     const input = { id: userId };
     const result = await API.graphql(graphqlOperation(getUser, input));
-    this.setState({ orders: result.data.getUser.orders.items });
+    console.log(result);
+    if (result.data.getUser !== null) {
+      this.setState({ orders: result.data.getUser.orders.items });
+    } else {
+      return <Loading fullscreen={true} />;
+    }
   };
 
   handleUpdateEmail = async () => {
@@ -153,6 +162,32 @@ class ProfilePage extends React.Component {
         message: `${error.message || "Error updating email"}`,
       });
     }
+  };
+
+  handleDeleteProfile = () => {
+    MessageBox.confirm(
+      "This will permanently delete your account. All your data (orders/products) will be lost. Continue?",
+      "Attention!",
+      {
+        confirmButtonText: "Delete",
+        cancelButtonText: "Cancel",
+        type: "warning",
+      }
+    )
+      .then(async () => {
+        try {
+          await this.props.user.deleteUser(() => window.location.reload());
+        } catch (error) {
+          console.error(error);
+        }
+      })
+      // is user canceled deleteing profile
+      .catch(() => {
+        Message({
+          type: "info",
+          message: "Delete canceled",
+        });
+      });
   };
 
   render() {
@@ -226,7 +261,7 @@ class ProfilePage extends React.Component {
                         </p>
                         <p>
                           <strong className="colored">Purchased on:</strong>{" "}
-                          {order.createdAt}
+                          {formatOrderDate(order.createdAt)}
                         </p>
                         {order.shippedAddress && (
                           <>
