@@ -23,3 +23,12 @@ htqldqwlkwrlsgkvwi@pp7rvv.com
   > Install dependencies : amplify function build
   
 # https://date-fns.org/
+
+
+code: "MessageRejected"
+message: "Email address is not verified. The following identities failed the check in region EU-WEST-3: hdbhbqxehaigndmvsv@pp7rvv.com, same.dan.developer@gmail.com"
+requestId: "cc60d773-df48-4487-a508-51524eda73a3"
+retryDelay: 50.31146745590105
+retryable: false
+statusCode: 400
+time: "2021-11-16T11:35:06.646Z"
